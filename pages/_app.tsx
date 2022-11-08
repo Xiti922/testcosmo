@@ -4,7 +4,7 @@ import {
   ChainInfoID,
   WalletManagerProvider,
   WalletType,
-} from "@xiti/cosmodal"
+} from "cosmodal"
 import type { AppProps } from "next/app"
 import { FunctionComponent } from "react"
 import { GasPrice } from "@cosmjs/stargate"
@@ -15,7 +15,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => (
   <WalletManagerProvider
     walletConnectClientMeta={{
       name: "CosmodalExampleDApp",
-      description: "A dApp using the @xiti/cosmodal library.",
+      description: "A dApp using the cosmodal library.",
       url: "https://noahsaso-cosmodal.vercel.app",
       icons: ["https://moonphase.is/image.svg"],
     }}
