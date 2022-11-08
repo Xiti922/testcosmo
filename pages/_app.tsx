@@ -4,7 +4,7 @@ import {
   ChainInfoID,
   WalletManagerProvider,
   WalletType,
-} from "cosmodal"
+} from "@xiti/cosmodal"
 import type { AppProps } from "next/app"
 import { FunctionComponent } from "react"
 import { GasPrice } from "@cosmjs/stargate"
