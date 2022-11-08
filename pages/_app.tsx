@@ -1,0 +1,44 @@
+import "../styles/globals.css"
+
+import {
+  ChainInfoID,
+  WalletManagerProvider,
+  WalletType,
+} from "@xiti/cosmodal"
+import type { AppProps } from "next/app"
+import { FunctionComponent } from "react"
+import { GasPrice } from "@cosmjs/stargate"
+
+const LOCAL_STORAGE_KEY = "connectedWalletId"
+
+const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => (
+  <WalletManagerProvider
+    walletConnectClientMeta={{
+      name: "CosmodalExampleDApp",
+      description: "A dApp using the @xiti/cosmodal library.",
+      url: "https://noahsaso-cosmodal.vercel.app",
+      icons: ["https://moonphase.is/image.svg"],
+    }}
+    enabledWalletTypes={[WalletType.Keplr, WalletType.WalletConnectKeplr]}
+    renderLoader={() => <p>Loading...</p>}
+    localStorageKey={LOCAL_STORAGE_KEY}
+    defaultChainId={ChainInfoID.Terpnet1}
+    getSigningCosmWasmClientOptions={(chainInfo) => ({
+      gasPrice: GasPrice.fromString("0.0025" + chainInfo.feeCurrencies[0].coinMinimalDenom),
+    })}
+    getSigningStargateClientOptions={(chainInfo) => ({
+      gasPrice: GasPrice.fromString("0.0025" + chainInfo.feeCurrencies[0].coinMinimalDenom),
+    })}
+    // Choose a different RPC node for the desired chain.
+    // chainInfoOverrides={[
+    //   {
+    //     ...ChainInfoMap[ChainInfoID.Terpnet1],
+    //     rpc: "https://rpc-terp.zenchainlabs.io/",
+    //   }
+    // ]}
+  >
+    <Component {...pageProps} />
+  </WalletManagerProvider>
+)
+
+export default MyApp
